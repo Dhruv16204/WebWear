@@ -4,8 +4,8 @@
 
 **WebWear** is a modern fashion e-commerce site designed to deliver a seamless shopping experience. It integrates a React frontend with a Node.js + Express backend, secured with JWT and powered by MongoDB for data persistence. Cloudinary is used for image uploads and PayPal for payment processing.
 
-![WebWear Login](/login.png)
-![WebWear Home](screenshots/home.png)
+![WebWear Login](screenshots/login.jpg)
+![WebWear Home](screenshots/home.jpg)
 
 
 ---
