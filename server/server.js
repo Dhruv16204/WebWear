@@ -14,6 +14,11 @@ const shopSearchRouter = require('./routes/shop/search-route')
 const shopReviewRouter = require('./routes/shop/review-routes')
 const commonFeatureRouter = require('./routes/common/feature-routes')
 
+//middleware
+app.use(cookieParser());
+app.use(express.json());
+require('dotenv').config();
+
 //database connection
 const dbConnect = require('./config/database');
 dbConnect();
@@ -34,11 +39,6 @@ app.use(
         credentials : true
     })
 );
-
-//middleware
-app.use(cookieParser());
-app.use(express.json());
-require('dotenv').config();
 
 //routes
 app.use('/api/auth',authRouter);
