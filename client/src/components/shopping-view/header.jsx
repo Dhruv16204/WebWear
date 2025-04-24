@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { shoppingViewHeaderMenuItems } from '@/config';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '../ui/avatar';
-import { logoutUser } from '@/store/auth-slice';
+import { logoutUser, resetTokenAndCredentials } from '@/store/auth-slice';
 import { Label } from '../ui/label';
 import UserCartWrapper from './UserCartWrapper';
 import { fetchCartItems } from '@/store/shop/cart-slice/ShopCartSlice';
@@ -61,7 +61,10 @@ function HeaderRightContent() {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate('/auth/login');
   }
 
   useEffect(() => {

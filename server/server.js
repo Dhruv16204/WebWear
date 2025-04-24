@@ -22,7 +22,7 @@ dbConnect();
 //cors
 app.use(
     cors({
-        origin : 'http://localhost:5173' ,
+        origin : process.env.CLIENT_BASE_URL ,
         methods : ['GET','POST','PUT' ,'DELETE'] ,
         allowedHeaders : [
             "Content-Type",
@@ -38,6 +38,7 @@ app.use(
 //middleware
 app.use(cookieParser());
 app.use(express.json());
+require('dotenv').config();
 
 //routes
 app.use('/api/auth',authRouter);

@@ -88,18 +88,30 @@ const loginUser = async(req,res)=>{
             {expiresIn: "120m"}
         );
 
-        res.cookie('token',token,{
-            httpOnly:true,
-            secure:false
-        }).json({
+        // res.cookie('token',token,{
+        //     httpOnly:true,
+        //     secure:true
+        // }).json({
+        //     success:true,
+        //     message:"Logged In Successfully",
+        //     user:{
+        //         id: checkUser._id,
+        //         email : checkUser.email,
+        //         role : checkUser.role,
+        //         userName:checkUser.userName
+        //     }
+        // })
+
+        res.status(200).json({
             success:true,
             message:"Logged In Successfully",
+            token,
             user:{
-                id: checkUser._id,
-                email : checkUser.email,
-                role : checkUser.role,
-                userName:checkUser.userName
-            }
+                    id: checkUser._id,
+                    email : checkUser.email,
+                    role : checkUser.role,
+                    userName:checkUser.userName
+                }
         })
         
     } catch (error) {
@@ -122,9 +134,35 @@ const logoutUser = (req,res)=>{
 }
 
 //middleware -> refresh, etc
+// const authMiddleware = async(req,res,next)=>{
+//     //agar token present nahi hai to
+//     const token = req.cookies?.token;
+//     console.log("🔹 Received Token:", token); 
+//     if(!token) {
+//         return res.status(401).json({
+//             success:false,
+//             message:"Unauthorized User! no token found."
+//         })
+//     }
+
+//     try {
+//         const decoded = jwt.verify(token,process.env.SECRET_KEY);
+//         req.user = decoded;
+//         next();
+//     } catch (error) {
+//         console.log("JWT Verification Error:", error.message);
+//         return res.status(401).json({
+//             success:false,
+//             message:"Unauthorized User! invalid or expired token."
+//         })
+//     }
+
+// }
+
 const authMiddleware = async(req,res,next)=>{
     //agar token present nahi hai to
-    const token = req.cookies?.token;
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
     console.log("🔹 Received Token:", token); 
     if(!token) {
         return res.status(401).json({

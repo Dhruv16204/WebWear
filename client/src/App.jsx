@@ -31,10 +31,9 @@ function App() {
 
   const dispatch = useDispatch();
 
-  console.log(isAuthenticated)
-
   useEffect(()=>{
-    dispatch(checkAuth())
+    const token = JSON.parse(sessionStorage.getItem('token'))
+    dispatch(checkAuth(token))
   },[dispatch]);
 
   if(isLoading) {return <LoadingSpinner/>}
