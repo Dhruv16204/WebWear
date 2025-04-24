@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom'
 import ProductDetailsDialog from '@/components/shopping-view/ProductDetailsDialog'
 import { toast } from 'react-hot-toast'
 import { addToCart, fetchCartItems } from '@/store/shop/cart-slice/ShopCartSlice'
+import { getFeatureImages } from '@/store/common/FeatureSlice'
 
 const categoriesWithIcon = [
   { id: "men", label: "Men", icon: FaMale  },
@@ -47,6 +48,7 @@ const ShoppingHome = () => {
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
+  // const { featureImageList } = useSelector((state) => state.commonFeature);
 
 
   function handleNavigateToListingPage(getCurrentItem, section) {
@@ -99,6 +101,10 @@ const ShoppingHome = () => {
       })
     );
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(getFeatureImages());
+  // }, [dispatch]);
 
   return (
     <div className="flex flex-col min-h-screen">

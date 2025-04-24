@@ -21,6 +21,8 @@ import ShoppingCheckout from './pages/shopping-view/checkout'
 import ShoppingListing from './pages/shopping-view/listing'
 import PaypalReturnPage from './pages/shopping-view/PaypalReturnPage'
 import PaymentSuccessPage from './pages/shopping-view/PaymentSuccessPage'
+import SearchProducts from './pages/shopping-view/search'
+import LoadingSpinner from './components/common/LoadingSpinner'
 
 
 function App() {
@@ -35,17 +37,26 @@ function App() {
     dispatch(checkAuth())
   },[dispatch]);
 
-  if(isLoading) return <Skeleton className="w-[800px] h-[600px] bg-black" />
+  if(isLoading) {return <LoadingSpinner/>}
 
 
   return (
     <div className='flex flex-col overflow-hidden bg-white'>
       <Routes>
-        <Route path='/auth' element={
-          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-            <AuthLayout/>
-          </CheckAuth>
-        }>
+        <Route
+            path="/"
+            element={
+              <CheckAuth
+                isAuthenticated={isAuthenticated}
+                user={user}
+              ></CheckAuth>
+            }
+          />
+          <Route path='/auth' element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <AuthLayout/>
+            </CheckAuth>
+          }>
           <Route path='login' element={<AuthLogin/>}/>
           <Route path='register' element={<AuthRegister/>} />
         </Route>
@@ -74,6 +85,7 @@ function App() {
           <Route path='listing' element={<ShoppingListing/>} />
           <Route path='paypal-return' element={<PaypalReturnPage/>} />
           <Route path='payment-success' element={<PaymentSuccessPage/>} />
+          <Route path='search' element={<SearchProducts/>} />
         </Route>
 
         {/* unauthpage */}

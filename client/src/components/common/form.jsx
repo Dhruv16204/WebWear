@@ -1,5 +1,7 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { Eye, EyeOff } from "lucide-react";  
+
 import {
   Select,
   SelectContent,
@@ -24,22 +26,63 @@ function CommonForm({
 
     switch (getControlItem.componentType) {
       case "input":
-        element = (
-          <Input
-            name={getControlItem.name}
-            placeholder={getControlItem.placeholder}
-            id={getControlItem.name}
-            type={getControlItem.type}
-            value={value}
-            onChange={(event) =>
-              setFormData({
-                ...formData,
-                [getControlItem.name]: event.target.value,
-              })
-            }
-          />
-        );
 
+        if (getControlItem.type === "password") {
+          element = (
+            <div className="relative">
+              <Input
+                name={getControlItem.name}
+                placeholder={getControlItem.placeholder}
+                id={getControlItem.name}
+                // ✅ Toggle input type based on visibility state stored in formData
+                type={formData[getControlItem.name + "_show"] ? "text" : "password"}
+                value={value}
+                onChange={(event) =>
+                  setFormData({
+                    ...formData,
+                    [getControlItem.name]: event.target.value,
+                  })
+                }
+                className="pr-10" // ✅ Extra padding for space to show button
+              />
+              {/* ✅ Toggle button to switch between Show/Hide */}
+              <button
+                type="button"
+                onClick={() =>
+                  setFormData({
+                    ...formData,
+                    [getControlItem.name + "_show"]: !formData[getControlItem.name + "_show"],
+                  })
+                }
+                className="absolute inset-y-0 right-2 flex items-center text-sm text-muted-foreground"
+              >
+                {/* ✅ Button label changes based on state */}
+                {formData[getControlItem.name + "_show"] ? (
+                  <EyeOff className="w-5 h-5" />
+                ):(
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+          );
+        }
+        else {
+          element = (
+            <Input
+              name={getControlItem.name}
+              placeholder={getControlItem.placeholder}
+              id={getControlItem.name}
+              type={getControlItem.type}
+              value={value}
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  [getControlItem.name]: event.target.value,
+                })
+              }
+            />
+          );
+        }
         break;
       case "select":
         element = (

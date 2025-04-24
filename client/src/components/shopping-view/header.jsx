@@ -78,8 +78,12 @@ function HeaderRightContent() {
           className="relative"
         >
           <ShoppingCart className="w-6 h-6" />
-          <span className="absolute top-[-5px] right-[2px] font-bold text-sm">
-            {/* {cartItems?.items?.length || 0} */}
+          <span
+          className={`absolute top-[-5px] right-[-5px] font-bold text-sm transition-transform transform ${
+          cartItems?.items?.length > 0 ? 'scale-105 bg-black text-white' : 'bg-gray-400 text-white'
+          } rounded-full w-6 h-6 flex items-center justify-center animate-bounce`}
+          >
+            {cartItems?.items?.length || 0} {/* Displays the number of items in the cart */}
           </span>
           <span className="sr-only">User cart</span>
         </Button>
