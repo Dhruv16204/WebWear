@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -17,7 +19,7 @@ const commonFeatureRouter = require('./routes/common/feature-routes')
 //middleware
 app.use(cookieParser());
 app.use(express.json());
-require('dotenv').config();
+
 
 //database connection
 const dbConnect = require('./config/database');
