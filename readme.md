@@ -100,6 +100,9 @@ npm start
 - **Backend** → `http://localhost:5000`
 
 ---
+## 📜 License
 
+This project is licensed under the [MIT License](LICENSE)
+---
 ## Authors
 - [@DhruvSolanki](https://github.com/Dhruv16204)
