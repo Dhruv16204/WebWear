@@ -10,6 +10,12 @@
 
 ---
 
+## 🎥 Demo Account (Live Website)
+- **Email**: dummy6@gmail
+- **Password**: 1234
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -91,7 +97,7 @@ npm start
 ## 🌍 URLs
 
 - **Frontend** → `http://localhost:5173`
-- **Backend** → `http://localhost:3000`
+- **Backend** → `http://localhost:5000`
 
 ---
 
